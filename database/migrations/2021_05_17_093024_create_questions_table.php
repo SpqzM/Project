@@ -15,6 +15,12 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 100);
+            $table->text('content');
+            // Création de la clé étrangère user_id
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            // Création des champs created_at et updated_at
             $table->timestamps();
         });
     }
