@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layout');
-});
+// Route::get('/', function () {
+//     return view('layout');
+// });
+Route::get('/', [App\Http\Controllers\DefaultController::class, 'home'])->name('home');
+Route::get('/questions', [App\Http\Controllers\QuestionController::class, 'index'])->name('questions.index');
