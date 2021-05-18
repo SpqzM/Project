@@ -18,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', [App\Http\Controllers\DefaultController::class, 'home'])->name('home');
 Route::get('/questions', [App\Http\Controllers\QuestionController::class, 'index'])->name('questions.index');
+Route::get('/questions/form', [App\Http\Controllers\QuestionController::class, 'form'])->name('questions.form');
+Route::get('/users/register', [App\Http\Controllers\UserController::class, 'register'])->name('register');
+Route::post('/users/signin', [App\Http\Controllers\UserController::class, 'signin'])->name('signin');
+Route::post('/users', [App\Http\Controllers\UserController::class, 'signup'])->name('signup');
+Route::get('/users/login', [App\Http\Controllers\UserController::class, 'login'])->name('login');
+
+
+

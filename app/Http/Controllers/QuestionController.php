@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -13,6 +15,15 @@ class QuestionController extends Controller
         
         return view('questions.index', [
             'questions' => $questions    
+        ]);
+    }
+    
+    public function form()
+    {
+        $categories = DB::table('categories')->get();
+        
+        return view('questions.form', [
+            'categories' => $categories    
         ]);
     }
 }
