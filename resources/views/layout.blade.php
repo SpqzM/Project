@@ -21,10 +21,10 @@
                         <a class="nav-link" href="{{ route('questions.index') }}">Questions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Inscription</a>
+                        <a class="nav-link" href="{{ route('register') }}">Inscription</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Connexion</a>
+                        <a class="nav-link" href="{{ route('signin') }}">Connexion</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
