@@ -9,6 +9,11 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+    
     public function register()
     {
         return view('users.register');
@@ -52,5 +57,13 @@ class UserController extends Controller
         return back()->withErrors([
             'credentials' => 'Les identifiants ne correspondent pas'
         ]);
+    }
+    
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('home');
     }
 }
