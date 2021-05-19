@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 
 class QuestionController extends Controller
@@ -21,7 +22,7 @@ class QuestionController extends Controller
     
     public function index()
     {
-        $questions = Question::with('user')->latest()->Paginate(10);
+        $questions = Question::with('user', 'categories')->latest()->Paginate(10);
         
         return view('questions.index', [
             'questions' => $questions    
@@ -66,6 +67,7 @@ class QuestionController extends Controller
         // Enregistrer la nouvelle question
         $question = new Question();
         $question->title = $request->input('title');
+        $question->slug = Str::slug($question->title, '-');
         $question->content = $request->input('content');
         $question->user_id = 1;
         $question->save();
