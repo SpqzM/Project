@@ -7,8 +7,18 @@ use App\Models\Question;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
+
 class QuestionController extends Controller
 {
+    public function __construct()
+    {
+        // Middleware d'authentification
+        // Avant d'appeler la méthode du contrôleur il vérifie qu'il peut le faire
+        // Pour appeler les méthodes create et store il faut être authentifié
+        // Sinon on est redirigé vers la page de login
+        $this->middleware('auth')->only(['form', 'store']);
+    }
+    
     public function index()
     {
         $questions = Question::with('user')->latest()->Paginate(10);
@@ -16,6 +26,7 @@ class QuestionController extends Controller
         return view('questions.index', [
             'questions' => $questions    
         ]);
+        
     }
     
     public function form()
@@ -26,6 +37,7 @@ class QuestionController extends Controller
             'categories' => $categories    
         ]);
     }
+
     public function show(string $slug)
     {
         $question = Question::where('slug', $slug)->firstOrFail();
@@ -41,5 +53,27 @@ class QuestionController extends Controller
             'comments' => $comments,
             'categories' => $categories
         ]);
+
     }
+    public function store(Request $request)
+    {
+        // Conditions de validation du formulaire de question
+        $request->validate([
+            'title' => 'required|min:3',
+            'content' => 'required|min:5|max:280',
+        ]);
+        
+        // Enregistrer la nouvelle question
+        $question = new Question();
+        $question->title = $request->input('title');
+        $question->content = $request->input('content');
+        $question->user_id = 1;
+        $question->save();
+        
+        $question->categories()->attach($request->input('categories'));
+        
+        // Redirection vers la page d'accueil
+        return redirect()->route('home');
+    }
+    
 }

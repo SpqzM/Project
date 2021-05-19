@@ -3,7 +3,9 @@
 @section('title', 'Posez votre question')
 
 @section('content')
-     <form action="{{ route('questions.store') }}" method="post" enctype="multipart/form-data">
+
+    <form action="{{ route('questions.store') }}" method="post" enctype="multipart/form-data">
+
         @csrf
         
         @if($errors->any())
@@ -28,7 +30,7 @@
         
         <div class="form-group">
             <label for="categories">Catégorie(s)</label>
-            <select multiple class="form-control" id="categories" name="categories">
+            <select multiple class="form-control" id="categories" name="categories[]">
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->content }}</option>
                 @endforeach
@@ -37,7 +39,5 @@
         
         <button type="submit" class="btn btn-primary">Poster la question</button>
     </form>
-
-
 
 @endsection
