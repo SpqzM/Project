@@ -3,7 +3,9 @@
 @section('title', 'Posez votre question')
 
 @section('content')
+
     <form action="{{ route('questions.store') }}" method="post" enctype="multipart/form-data">
+
         @csrf
         
         @if($errors->any())

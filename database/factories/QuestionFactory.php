@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Question;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class QuestionFactory extends Factory
 {
@@ -21,10 +22,15 @@ class QuestionFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->unique()->words(3, true);
+        $slug = Str::slug($title, '-');
+        
         return [
-            'title' => $this->faker->words(3, true),
+            'title' => $title,
+            'slug' => $slug,
             'content' => $this->faker->paragraphs(5, true),
             'user_id' => 1
         ];
     }
+
 }

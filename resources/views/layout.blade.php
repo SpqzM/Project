@@ -31,7 +31,9 @@
                         <a class="nav-link" href="{{ route('login') }}">Connexion</a>
                     </li>
                     <li class="nav-item">
+
                         <a class="nav-link" href="{{ route('register') }}">Inscription</a>
+
                     </li>
                     @endguest
                     <li class="nav-item dropdown">

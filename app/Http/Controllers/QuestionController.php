@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 
 class QuestionController extends Controller
@@ -21,7 +22,7 @@ class QuestionController extends Controller
     
     public function index()
     {
-        $questions = Question::with('user')->latest()->Paginate(10);
+        $questions = Question::with('user', 'categories')->latest()->Paginate(10);
         
         return view('questions.index', [
             'questions' => $questions 
@@ -37,7 +38,24 @@ class QuestionController extends Controller
             'categories' => $categories    
         ]);
     }
-    
+
+    public function show(string $slug)
+    {
+        $question = Question::where('slug', $slug)->firstOrFail();
+        
+        // Liste des commentaires du plus récent au plus ancien
+        $comments = $question->answers()->latest()->get();
+        
+        // Récupération de la liste des catégories
+        $categories = $question->categories;
+        
+        return view('questions.show', [
+            'question' => $question,
+            'comments' => $comments,
+            'categories' => $categories
+        ]);
+
+    }
     public function store(Request $request)
     {
         // Conditions de validation du formulaire de question
@@ -49,6 +67,7 @@ class QuestionController extends Controller
         // Enregistrer la nouvelle question
         $question = new Question();
         $question->title = $request->input('title');
+        $question->slug = Str::slug($question->title, '-');
         $question->content = $request->input('content');
         $question->user_id = 1;
         $question->save();
@@ -59,8 +78,4 @@ class QuestionController extends Controller
         return redirect()->route('home');
     }
     
-    public function show()
-    {
-        
-    }
 }
