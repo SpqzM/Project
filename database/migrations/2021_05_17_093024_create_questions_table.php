@@ -16,6 +16,8 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->string('title', 100);
+            // Création du champ slug
+            $table->string('slug')->unique();
             $table->text('content');
             // Création de la clé étrangère user_id
             $table->unsignedBigInteger('user_id');

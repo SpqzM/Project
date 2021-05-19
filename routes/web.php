@@ -23,6 +23,7 @@ Route::get('/users/register', [App\Http\Controllers\UserController::class, 'regi
 Route::post('/users/signin', [App\Http\Controllers\UserController::class, 'signin'])->name('signin');
 Route::post('/users', [App\Http\Controllers\UserController::class, 'signup'])->name('signup');
 Route::get('/users/login', [App\Http\Controllers\UserController::class, 'login'])->name('login');
+Route::post('/questions/{id}/answers', [App\Http\Controllers\AnswerController::class, 'store'])->name('answers.store');
 
 
 

@@ -53,4 +53,11 @@ class UserController extends Controller
             'credentials' => 'Les identifiants ne correspondent pas'
         ]);
     }
+       public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('home');
+    }
 }

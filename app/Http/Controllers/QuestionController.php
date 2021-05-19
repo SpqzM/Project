@@ -26,4 +26,20 @@ class QuestionController extends Controller
             'categories' => $categories    
         ]);
     }
+    public function show(string $slug)
+    {
+        $question = Question::where('slug', $slug)->firstOrFail();
+        
+        // Liste des commentaires du plus récent au plus ancien
+        $comments = $question->answers()->latest()->get();
+        
+        // Récupération de la liste des catégories
+        $categories = $question->categories;
+        
+        return view('questions.show', [
+            'question' => $question,
+            'comments' => $comments,
+            'categories' => $categories
+        ]);
+    }
 }
