@@ -21,6 +21,6 @@ class Question extends Model
     
     public function categories()
     {
-        return $this->belongsToMany(Question::class);
+        return $this->belongsToMany(Category::class);
     }
 }

@@ -39,9 +39,10 @@ class QuestionController extends Controller
         $question = new Question();
         $question->title = $request->input('title');
         $question->content = $request->input('content');
-        $question->categories = $request->input('categories');
         $question->user_id = 1;
         $question->save();
+        
+        $question->categories()->attach($request->input('categories'));
         
         // Redirection vers la page d'accueil
         return redirect()->route('home');
