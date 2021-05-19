@@ -8,7 +8,10 @@
     <nav>
         {{ $questions->links() }}
     </nav>
-
+    @foreach($categories as $category)
+    <p>{{ $category->content }}</p>
+    @endforeach
+    
     @foreach($questions as $question)
         <article>
             <header>

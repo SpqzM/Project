@@ -7,11 +7,7 @@
     <p>Un forum d'entraide pour les développeurs.</p>
     <p>Vous êtes bloqué(e) et ne savez pas comment avancer ? Posez une question à la communauté !</p>
     <p>
-        @if(Auth::check())
         <a href="{{ route('questions.form') }}" class="btn btn-primary">Poser une question</a>
-        @else
-        <a href="{{ route('login') }}" class="btn btn-primary">Poser une question</a>
-        @endif
         <a href="{{ route('questions.index') }}" class="btn btn-success ml-1">Voir toutes les questions</a>
     </p>
     

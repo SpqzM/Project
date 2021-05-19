@@ -7,8 +7,18 @@ use App\Models\Question;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
+
 class QuestionController extends Controller
 {
+    public function __construct()
+    {
+        // Middleware d'authentification
+        // Avant d'appeler la méthode du contrôleur il vérifie qu'il peut le faire
+        // Pour appeler les méthodes create et store il faut être authentifié
+        // Sinon on est redirigé vers la page de login
+        $this->middleware('auth')->only(['form', 'store']);
+    }
+    
     public function index()
     {
         $questions = Question::with('user')->latest()->Paginate(10);
@@ -16,6 +26,7 @@ class QuestionController extends Controller
         return view('questions.index', [
             'questions' => $questions    
         ]);
+        
     }
     
     public function form()
@@ -46,5 +57,10 @@ class QuestionController extends Controller
         
         // Redirection vers la page d'accueil
         return redirect()->route('home');
+    }
+    
+    public function show()
+    {
+        
     }
 }

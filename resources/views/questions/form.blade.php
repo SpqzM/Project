@@ -38,6 +38,4 @@
         <button type="submit" class="btn btn-primary">Poster la question</button>
     </form>
 
-
-
 @endsection
