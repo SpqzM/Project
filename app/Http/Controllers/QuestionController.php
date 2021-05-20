@@ -44,7 +44,7 @@ class QuestionController extends Controller
         $question = Question::where('slug', $slug)->firstOrFail();
         
         // Liste des réponses de la plus récente à la plus ancienne
-        $answers = $question->answers()->latest()->get();
+        $answers = $question->answers()->with('user')->latest()->get();
         
         // Récupération de la liste des catégories
         $categories = $question->categories;
@@ -69,7 +69,7 @@ class QuestionController extends Controller
         $question->title = $request->input('title');
         $question->slug = Str::slug($question->title, '-');
         $question->content = $request->input('content');
-        $question->user_id = 1;
+        $question->user_id = auth()->user()->id;
         $question->save();
         
         $question->categories()->attach($request->input('categories'));
