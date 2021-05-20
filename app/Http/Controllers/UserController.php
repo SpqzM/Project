@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout', 'index');
     }
     
     public function register()
@@ -65,5 +65,11 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('home');
+    }
+    
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index', ['users' => $users]);
     }
 }

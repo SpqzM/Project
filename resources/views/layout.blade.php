@@ -20,9 +20,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('questions.index') }}">Questions</a>
                     </li>
+                    <!--<li class="nav-item">-->
+                    <!--    <a class="nav-link" href="{{ route('users.index') }}">Liste des utilisateurs</a>-->
+                    <!--</li>-->
                     @auth
                     <li class="nav-item">
                         <a href="{{ route('logout') }}" class="nav-link">Déconnexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('users.index') }}">Liste des utilisateurs</a>
                     </li>
                     @endauth
                     
@@ -35,6 +41,7 @@
                         <a class="nav-link" href="{{ route('register') }}">Inscription</a>
 
                     </li>
+                    
                     @endguest
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
