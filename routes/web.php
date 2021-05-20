@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\DefaultController::class, 'home'])->name('home');
 Route::get('/questions', [App\Http\Controllers\QuestionController::class, 'index'])->name('questions.index');
 Route::get('/questions/form', [App\Http\Controllers\QuestionController::class, 'form'])->name('questions.form');
+Route::get('/questions/{slug}', [App\Http\Controllers\QuestionController::class, 'show'])->name('questions.show');
 Route::post('/questions', [App\Http\Controllers\QuestionController::class, 'store'])->name('questions.store');
 Route::get('/users/register', [App\Http\Controllers\UserController::class, 'register'])->name('register');
 Route::post('/users/signin', [App\Http\Controllers\UserController::class, 'signin'])->name('signin');

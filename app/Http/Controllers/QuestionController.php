@@ -43,15 +43,15 @@ class QuestionController extends Controller
     {
         $question = Question::where('slug', $slug)->firstOrFail();
         
-        // Liste des commentaires du plus récent au plus ancien
-        $comments = $question->answers()->latest()->get();
+        // Liste des réponses de la plus récente à la plus ancienne
+        $answers = $question->answers()->latest()->get();
         
         // Récupération de la liste des catégories
         $categories = $question->categories;
         
         return view('questions.show', [
             'question' => $question,
-            'comments' => $comments,
+            'answers' => $answers,
             'categories' => $categories
         ]);
 
